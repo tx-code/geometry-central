@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.8.0)
 
 # Maybe stop from CMAKEing in the wrong place
-if (CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
-    message(FATAL_ERROR "Source and build directories cannot be the same. Go use the /build directory.")
+if(CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(FATAL_ERROR "Source and build directories cannot be the same. Go use the /build directory.")
 endif()
 
 # List of .cpp files to be compiled
@@ -10,7 +10,7 @@ SET(SRCS
 
   surface/surface_mesh.cpp
   surface/manifold_surface_mesh.cpp
-  surface/halfedge_factories.cpp  
+  surface/halfedge_factories.cpp
   surface/surface_mesh_factories.cpp
   surface/meshio.cpp
   surface/simple_polygon_mesh.cpp
@@ -59,9 +59,9 @@ SET(SRCS
   surface/quadric_error_simplification.cpp
   surface/subdivide.cpp
   surface/poisson_disk_sampler.cpp
-  #surface/detect_symmetry.cpp
-  #surface/mesh_ray_tracer.cpp
-  
+
+  # surface/detect_symmetry.cpp
+  # surface/mesh_ray_tracer.cpp
   pointcloud/point_cloud.cpp
   pointcloud/neighborhoods.cpp
   pointcloud/point_position_geometry.cpp
@@ -176,6 +176,8 @@ add_library(geometry-central ${SRCS} ${HEADERS})
 
 # Includes from this project
 target_include_directories(geometry-central PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include")
+
+find_package(Eigen3 CONFIG REQUIRED)
 
 # Add all includes and link libraries from dependencies, which were populated in deps/CMakeLists.txt
 target_link_libraries(geometry-central PUBLIC ${GC_DEP_LIBS})
